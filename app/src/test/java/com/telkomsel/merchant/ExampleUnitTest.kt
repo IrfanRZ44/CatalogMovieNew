@@ -1,4 +1,4 @@
-package id.telkomsel.merchandise
+package id.exomatik.catalogmovie
 
 import org.junit.Test
 

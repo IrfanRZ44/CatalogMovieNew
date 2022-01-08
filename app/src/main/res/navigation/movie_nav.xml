@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav"
+    android:label="Authentication"
+    tools:showIn="navigation_view"
+    app:startDestination="@id/daftarMovieFragment">
+    <fragment
+        android:id="@+id/lihatFotoFragment"
+        android:name="id.exomatik.catalogmovie.utils.LihatFotoFragment"
+        android:label="@string/foto"
+        tools:layout="@layout/fragment_lihat_foto"
+        />
+    <fragment
+        android:id="@+id/daftarMovieFragment"
+        android:name="id.exomatik.catalogmovie.ui.movie.listMovie.DaftarMovieFragment"
+        android:label="fragment_daftar_movie"
+        tools:layout="@layout/fragment_daftar_movie" />
+    <fragment
+        android:id="@+id/detailMovieFragment"
+        android:name="id.exomatik.catalogmovie.ui.movie.detailMovie.DetailMovieFragment"
+        android:label="fragment_detail_movie"
+        tools:layout="@layout/fragment_detail_movie" />
+</navigation>
