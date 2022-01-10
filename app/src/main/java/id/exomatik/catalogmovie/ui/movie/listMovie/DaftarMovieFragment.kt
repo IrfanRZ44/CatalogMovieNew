@@ -29,6 +29,10 @@ class DaftarMovieFragment : BaseFragmentBind<FragmentDaftarMovieBinding>() {
 
         viewModel.getDaftarMovie()
 
+        onClick()
+    }
+
+    private fun onClick(){
         bind.swipeRefresh.setOnRefreshListener {
             viewModel.startPage = 1
             viewModel.listMovie.clear()

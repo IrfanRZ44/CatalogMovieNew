@@ -35,8 +35,9 @@ class DetailMovieViewModel(
     private val rcReview: RecyclerView,
     private val rcTrailer: RecyclerView,
     private val btnMoreReview: AppCompatButton,
-    private val btnMoreTrailer: AppCompatButton
+    private val btnMoreTrailer: AppCompatButton,
 ) : BaseViewModel() {
+    var idMovie = 0
     private val listGenre = ArrayList<ModelGenre>()
     private lateinit var adapterGenre: AdapterGenre
     private val listAllTrailer = ArrayList<ModelTrailer>()
@@ -126,7 +127,7 @@ class DetailMovieViewModel(
         }
     }
 
-    fun getDetailMovie(idMovie: Int) {
+    fun getDetailMovie() {
         isShowLoading.value = true
 
         RetrofitUtils.getDetailMovie("${idMovie}?api_key=${Constant.reffApiKey}",
@@ -163,8 +164,9 @@ class DetailMovieViewModel(
                     t: Throwable
                 ) {
                     showLog("Me not in")
+                    isShowError.value = true
                     isShowLoading.value = false
-                    message.value = t.message
+                    status.value = t.message
                 }
             })
     }
@@ -259,5 +261,10 @@ class DetailMovieViewModel(
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(item.url)
         activity?.startActivity(i)
+    }
+
+    fun onClickError(){
+        getDetailMovie()
+        isShowError.value = false
     }
 }

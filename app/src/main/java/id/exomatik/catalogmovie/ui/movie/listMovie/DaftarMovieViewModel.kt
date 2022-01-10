@@ -15,6 +15,7 @@ import id.exomatik.catalogmovie.model.response.ModelResponseDaftarMovie
 import id.exomatik.catalogmovie.ui.movie.detailMovie.DetailMovieFragment
 import id.exomatik.catalogmovie.utils.Constant
 import id.exomatik.catalogmovie.utils.RetrofitUtils
+import id.exomatik.catalogmovie.utils.adapter.showLog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -66,6 +67,7 @@ class DaftarMovieViewModel(
     fun getDaftarMovie() {
         isShowLoading.value = true
 
+        showLog("Get Daftar")
         RetrofitUtils.getDaftarMovie("${idSubKategori}?page=${startPage}&api_key=${Constant.reffApiKey}",
             object : Callback<ModelResponseDaftarMovie> {
                 override fun onResponse(
@@ -86,6 +88,8 @@ class DaftarMovieViewModel(
                                 startPage = 1
                                 idSubKategori += 1
                             }
+
+                            message.value = ""
                         }
                         else{
                             if (startPage > 1) {
@@ -107,8 +111,9 @@ class DaftarMovieViewModel(
                     call: Call<ModelResponseDaftarMovie>,
                     t: Throwable
                 ) {
+                    isShowError.value = true
                     isShowLoading.value = false
-                    message.value = t.message
+                    status.value = t.message
                 }
             })
     }
@@ -127,5 +132,13 @@ class DaftarMovieViewModel(
         bundle.putInt(Constant.reffMovie, item.id)
         fragmentTujuan.arguments = bundle
         navController.navigate(R.id.detailMovieFragment, bundle)
+    }
+
+    fun onClickError(){
+        startPage = 1
+        listMovie.clear()
+        adapterMovie.notifyDataSetChanged()
+        getDaftarMovie()
+        isShowError.value = false
     }
 }

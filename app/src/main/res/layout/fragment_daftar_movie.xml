@@ -55,6 +55,30 @@
             android:visibility="gone"
             android:layout_centerInParent="true"
             />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/red1"
+            android:orientation="vertical"
+            android:visibility="gone"
+            visible="@{viewModel.isShowError}"
+            android:layout_centerInParent="true"
+            >
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_restart_white"
+                android:background="@drawable/btn_circle_gray"
+                android:layout_centerInParent="true"
+                android:text="@string/try_again"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_h8"
+                android:fontFamily="@font/bauhaus"
+                android:onClick="@{()-> viewModel.onClickError()}"
+                />
+        </RelativeLayout>
     </RelativeLayout>
 
 </layout>

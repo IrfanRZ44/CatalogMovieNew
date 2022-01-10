@@ -29,7 +29,8 @@ class DetailMovieFragment : BaseFragmentBind<FragmentDetailMovieBinding>() {
             viewModel.initAdapterGenre()
             viewModel.initAdapterReview()
             viewModel.initAdapterTrailer(context?:throw Exception("Error, gagal memuat trailer"))
-            viewModel.getDetailMovie(this.arguments?.getInt(Constant.reffMovie)?:throw Exception("Error, terjadi kesalahan database"))
+            viewModel.idMovie = this.arguments?.getInt(Constant.reffMovie)?:throw Exception("Error, terjadi kesalahan database")
+            viewModel.getDetailMovie()
         }catch (e: Exception){
             viewModel.message.value = e.message
         }
